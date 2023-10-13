@@ -1,0 +1,53 @@
+
+
+/* CSS for your form */
+.form {
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+}
+
+.inputarea {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    border: none;
+    font-size: 17px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.inputarea:focus ~ label,
+.inputarea:valid ~ label {
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #3498db;
+}
+
+/*.error {*/
+/*    font-size: 14px;*/
+/*    color: red;*/
+/*    margin-top: 8px;*/
+/*}*/
+
+/* CSS for the submit button */
+button[type="submit"] {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    background-color: #FF0000;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    width: 110px;
+    height: 35px;
+}
+
+button[type="submit"]:hover {
+    background-color: #9f01ea;
+}
