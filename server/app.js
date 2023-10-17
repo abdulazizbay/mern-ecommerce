@@ -10,7 +10,7 @@ const authMiddleware = require("./middlewares/authMiddleware")
 
 app.use(cors(
     {
-        origin: ["https://mern-ecommerce-nu3p.vercel.app/"],
+        origin: ["https://mern-ecommerce-nu3p.vercel.app"],
         method: ["GET", "POST"],
         credentials:true
     }
