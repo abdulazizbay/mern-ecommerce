@@ -7,6 +7,15 @@ const path = require('path');
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const authMiddleware = require("./middlewares/authMiddleware")
+
+app.use(cors(
+    {
+        origin: ["https://deploy-mern-1whq.vercel.app"],
+        method: ["GET", "POST"],
+        credentials:true
+    }
+))
+
 const errorHandler = (err, req, res, next) => {
     res.status(500).json({ message: 'Internal server error' });
 };
@@ -25,22 +34,25 @@ app.use(errorHandler);
 
 
 app.get('api/protected-route', authMiddleware,(req, res) => {
-
     res.send('Welcome to the protected route!');
 });
 
-async function start(){
-    try{
-        await mongoose.connect(config.get('mongoURI'),{
+async function start() {
+    try {
+        await mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        app.listen(config.get('port'), ()=>{console.log(`successfully running`);})
-    }catch(e){
-        console.log(e)
-        process.exit(1)
+        app.listen(config.get('port'), () => {
+            console.log(`Successfully running`);
+        });
+    } catch (e) {
+        console.error(e);
+        process.exit(1);
     }
 }
-start()
+
+start();
+
 
 
