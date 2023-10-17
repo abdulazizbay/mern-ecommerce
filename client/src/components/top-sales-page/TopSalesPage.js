@@ -139,10 +139,9 @@ const StyledTopSalesPage = styled.div`
           .gray-box {
             width: ${(props) => props.gender.length === 1 ? "195px" : "230px"};
             height: ${(props) => props.gender.length === 1 ? "330px" : "352px"};
-            background-color: #D9D9D9;
-            
-            border-radius: 62px;
             margin-top: 108px;
+            border: 1px solid;
+            border-radius: 62px;
             
             p {
               font-size: 32px;

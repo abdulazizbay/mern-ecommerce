@@ -31,15 +31,15 @@ export const Bestsellers = ()=>{
                                 lobortis hendrerit blandit
                                 ultrices nulla id eu nullam.</p>
                         </div>
-                            <div className="arrows">
-                                <div className="left-arrow">
-                                    <LeftArrow size={60} color="white"/>
-                                </div>
-                                <div className="right-arrow">
-                                    <RightArrow size={60} color="white"/>
-                                </div>
+                        <div className="arrows">
+                            <div className="left-arrow">
+                                <LeftArrow size={60} color="white"/>
                             </div>
-                            <div className="page-number">1/10</div>
+                            <div className="right-arrow">
+                                <RightArrow size={60} color="white"/>
+                            </div>
+                        </div>
+                        <div className="page-number">1/10</div>
                     </div>
                     <div className="image-container">
                         <img src={image}/>
@@ -96,13 +96,13 @@ const StyledBestsellers = styled.div`
           font-weight: 600;
           padding-left: 355px;
         }
-        
+
 
       }
-      
+
     }
     .image-container{
-      
+
       img{
         width: 560px;
         height: 627px;
