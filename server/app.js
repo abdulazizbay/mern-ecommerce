@@ -43,7 +43,7 @@ async function start() {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        app.listen(config.get('port'), () => {
+        app.listen(5000, () => {
             console.log(`Successfully running`);
         });
     } catch (e) {
