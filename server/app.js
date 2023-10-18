@@ -10,7 +10,7 @@ const authMiddleware = require("./middlewares/authMiddleware")
 
 app.use(cors(
     {
-        origin: ["https://deploy-mern-1whq.vercel.app"],
+        origin: ["https://mern-ecommerce-nu3p.vercel.app"],
         method: ["GET", "POST"],
         credentials:true
     }
@@ -23,6 +23,9 @@ const errorHandler = (err, req, res, next) => {
 app.use(express.json({extended: true}));
 app.use(cors())
 app.use(cookieParser())
+app.use("/",(req, res)=>{
+    res.send("Server good")
+})
 app.use('/api/auth',require('./routes/userRouter'))
 app.use('/api/product',require('./routes/productRouter'))
 app.use('/api/category',require('./routes/categoryRouter'))
@@ -53,6 +56,4 @@ async function start() {
 }
 
 start();
-
-
 
