@@ -2,9 +2,9 @@ import styled from "styled-components"
 
 
 
-export const Button = ({bgcolor,fontcolor,children})=>{
+export const Button = ({bgcolor,fontcolor,children,onClick})=>{
     return (
-        <StyledButtons bgcolor={bgcolor} fontcolor={fontcolor} >
+        <StyledButtons bgcolor={bgcolor} fontcolor={fontcolor} onClick={onClick}>
             {children}
         </StyledButtons>
     )

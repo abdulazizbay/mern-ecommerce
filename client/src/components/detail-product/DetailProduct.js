@@ -5,9 +5,18 @@ import styled from "styled-components";
 import { Rate } from "antd";
 import { Button } from "../buttons/Button";
 import { AiOutlineHeart } from "react-icons/ai";
+import {setCartQty} from "../../states/state";
+import {useAuth} from "../../hooks/inUpHook";
+import { useDispatch } from 'react-redux';
+import {CustomToast} from "../custom-toast/CustomToast";
+import {Toaster} from "react-hot-toast";
 export const DetailProduct = () => {
     const { productId } = useParams();
     const { request, wait } = useHttp();
+    const auth = useAuth();
+    const dispatch = useDispatch()
+    const {ErrorToast ,LoadingToast,SuccessToast} = CustomToast()
+
     const sizeOptions = ["xs", "s", "m", "l", "xl"];
     const colorOptions = ["black", "white", "red", "blue"];
     const [productInfo, setProductInfo] = useState({
@@ -64,9 +73,35 @@ export const DetailProduct = () => {
         paymentDates.push(formattedDate);
     }
 
+    const handleAddCart = async () => {
+        try {
+            const data = await request("/api/cart/addtocart", "POST", [productId], {
+                Authorization: `Bearer ${auth.token}`,
+            });
+
+            if (data) {
+                const cartQty = data.cart.products.reduce((total, product) => total + product.qty, 0);
+                dispatch(setCartQty(cartQty));
+                await SuccessToast("Product added to cart successfully");
+            } else {
+                console.log("Data or products not found in the response.");
+                ErrorToast("Failed to add product to cart");
+            }
+        } catch (error) {
+            console.log(22)
+            console.log(error.message)
+            ErrorToast(error.message);
+
+        }
+    };
+
 
     return (
         <StyledDetailProduct>
+            <Toaster
+                position="bottom-right"
+                reverseOrder={false}
+            />
             <section>
                 <main>
                     <div className="media-container">
@@ -119,14 +154,19 @@ export const DetailProduct = () => {
                             </div>
                         </div>
                         <div className="cart-wishlist">
-                            <Button children="Добавить в карзину" bgcolor="#000000" fontcolor="#FFFFFF" />
+                            <Button
+                                children="Добавить в карзину"
+                                bgcolor="#000000"
+                                fontcolor="#FFFFFF"
+                                onClick={handleAddCart}
+                            />
                             <AiOutlineHeart size={60} />
                         </div>
                         <div className="payment-container">
                             <div className="wrapper">
                                 <div className="title">
                                     <h3>4 платежа по {devidePayment.toFixed(2)}$</h3>
-                                    <p>без % и переплат</p>
+                                    <p >без % и переплат</p>
                                 </div>
                                 <div className="devide-payment">
                                     {paymentDates.map((item, index) => (
@@ -217,7 +257,10 @@ const StyledDetailProduct = styled.div`
             width: 54px;
             height: 70px;
             border-radius: 10px;
-          }
+          }&:hover{
+             background-color: white;
+              border: 1px solid #000;
+           }
         }
         .red {
           background-color: #FF0000;
@@ -252,6 +295,7 @@ const StyledDetailProduct = styled.div`
             justify-content: center;
             align-items: center;
           }
+          
         }
       }
       .cart-wishlist {
