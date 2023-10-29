@@ -12,7 +12,9 @@ exports.clientgetallproducts = async (req, res) => {
             const allProducts = [...productsForMen, ...productsForGirls];
             return res.status(200).json(allProducts);
         }
-
+        if (!Array.isArray(category)) {
+            return res.status(400).json({ message: "Category should be an array." });
+        }
         const categoryIds = await Promise.all(
             category.map(async (cat) => {
                 const categoryDoc = await Category.findOne({ name: cat });
@@ -29,15 +31,20 @@ exports.clientgetallproducts = async (req, res) => {
 
 exports.getallproducts = async(req,res)=>{
     try{
-        const products = await Product.find()
-        return res.status(200).json(products)
+        const {productId} = req.body
+        if(!productId){
+            const products = await Product.find()
+            return res.status(200).json(products)
+        }
+        const exactProduct = await  Product.findById(productId)
+        return  res.status(200).json({ exactProduct: exactProduct})
     }catch(e){
         return res.status(400).json(e.message)
     }
 }
 
 exports.addproduct = async (req, res) => {
-    const { name, price, description, photo, review } = req.body;
+    const { name, price, description, photo, review,size } = req.body;
     try {
       const category = await Category.findOne({ name: req.body.category });
       if (!category) {
@@ -51,6 +58,7 @@ exports.addproduct = async (req, res) => {
         photo: photo,
         review: review,
         category: category,
+          size:size
       });
       await newProduct.save();
       res.json({ message: "success" });
@@ -72,7 +80,7 @@ exports.deleteprod = async (req, res) => {
 
 exports.put = async (req, res) => {
     try {
-      const { name, price, description, photo, review, category } = req.body;
+      const { name, price, description, photo, review, category,size } = req.body;
       const existingProduct = await Product.findById(req.params.id);
       if (!existingProduct) {
         return res.status(404).json({ message: "Product not found." });
@@ -87,6 +95,7 @@ exports.put = async (req, res) => {
           photo: photo,
           review: review,
           category: category,
+            size: size
         },
         { new: true }
       );

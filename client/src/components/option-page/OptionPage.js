@@ -23,16 +23,17 @@ export const OptionPage = () => {
                 <main>
                     <div
                         className={`men-img ${choice === "men" ? "active" : ""}`}
-                        onClick={() => handleOption("men")}
+                        onMouseEnter={() => handleOption("men")}
                     >
                         <div className="circle">
                             <img src={menImg} alt="Men" />
                             <span>Men's</span>
+
                         </div>
                     </div>
                     <div
                         className={`woman-img ${choice === "girls" ? "active" : ""}`}
-                        onClick={() => handleOption("girls")}
+                        onMouseEnter={() => handleOption("girls")}
                     >
                         <div className="circle">
                             <img src={womenImg} alt="Women" />
@@ -82,7 +83,9 @@ const StyledOptionPage = styled.div`
             max-width: 377px;
             max-height: 650px;
             margin-top: -124px;
-          }
+          }&:hover{
+             cursor: pointer;
+           }
 
           span {
             position: absolute;

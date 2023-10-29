@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap');
 @import url('https://blogfonts.com/css/aWQ9MTY0MjM3JnN1Yj0yMzcmYz1tJnR0Zj1NYXp6YXJkSC1CbGFjay5vdGYmbj1tYXp6YXJk/Mazzard.otf');
-
 @font-face {
   font-family: 'MazzardFont';
   src: url('../public/fonts/MazzardM-Regular.otf') format('opentype')
@@ -9,7 +8,6 @@
   font-family: 'InterFont';
   src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap') format('opentype')
 }
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -29,18 +27,16 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-
 body {
   line-height: 1;
   font-family: "MazzardFont", sans-serif;
   letter-spacing: 1px;
-  font-weight: bolder;
+  font-weight: 600;
 }
 
 ol, ul {

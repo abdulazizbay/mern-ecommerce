@@ -2,9 +2,7 @@ import {toast} from "react-hot-toast";
 
 export const CustomToast = () => {
 
-    const customToastStyle = {
 
-    };
 
     const customToastOptions = {
         duration: 5000,

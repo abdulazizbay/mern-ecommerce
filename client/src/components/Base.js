@@ -13,7 +13,6 @@ export const Base = () =>{
             <TopSalesPage/>
             <Bestsellers/>
             <SalesPage/>
-            <Footer/>
             <Toaster
                 position="bottom-right"
                 reverseOrder={false}

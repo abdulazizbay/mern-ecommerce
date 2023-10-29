@@ -8,7 +8,10 @@ const Product = require('../models/product')
 exports.addtocart = async (req, res) => {
     try {
         const productList = req.body;
+
         const userId = req.user.userId;
+        console.log(productList)
+        console.log(userId)
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ message: 'User not Found' });
@@ -35,8 +38,9 @@ exports.addtocart = async (req, res) => {
         const cart = await Cart.findOne({ user: userId });
         if (!cart) {
             console.log(444)
-            const newCart = new Cart({ user: userId, products: productList, bill: bill });
+            const newCart = new Cart({ user: userId, product: productList, bill: bill });
             await newCart.save();
+            console.log("ke;do")
             return res.status(200).json({ message: 'success', cart: newCart });
         } else {
             console.log(555)

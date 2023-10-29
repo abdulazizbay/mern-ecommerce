@@ -4,19 +4,26 @@ import cartIMG from "../..//assets/Vector.png"
 import logoIMG from "../../assets/sportClousLogo.png"
 import {PiUserCircleBold} from "react-icons/pi";
 import {AiOutlineHeart} from "react-icons/ai";
+import logoImgBlack from "../../assets/logoBlack.png"
 import "./searchButton.css"
 import { useSelector } from 'react-redux';
-
+import { useLocation } from "react-router-dom";
 export const Navbar = ()=>{
     const cartQty = useSelector((state) => Object.values(state.cartQty)[0]);
-    console.log(cartQty)
+    const location = useLocation();
+    const isHomePage = location.pathname === "/";
     return(
-        <StyledNavbar>
+        <StyledNavbar isHomePage={isHomePage}>
             <section className="navbar-container">
                 <nav className="navbar">
 
                     <div className="logo">
-                        <img src={logoIMG}/>
+                        {isHomePage?
+                            <img src={logoIMG}/>
+                            :
+                            <img src={logoImgBlack}/>
+                        }
+
                     </div>
                     <div className="options">
                         <ul>
@@ -64,7 +71,8 @@ const StyledNavbar = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        color: #FFFFFF;
+        color: ${(props) => (props.isHomePage ? "#fff" : "#000")};
+      ;
         padding: 0 120px;
         .logo{
           width: 72px;

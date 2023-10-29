@@ -29,7 +29,7 @@ const initialStateCart = {
 
 const cartQtySlice = createSlice({
     name: 'cartQty',
-    initialState: initialStateCart, // Corrected the initialization here
+    initialState: initialStateCart,
     reducers: {
         setCartQty: (state, action) => {
             state.cartQty = action.payload;
@@ -40,3 +40,4 @@ const cartQtySlice = createSlice({
 export const { setCartQty } = cartQtySlice.actions;
 
 export { cartQtySlice };
+

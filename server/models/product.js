@@ -19,6 +19,11 @@ const ProductSchema = new Schema({
         min: 0,
 
     },
+    size:{
+        type: String,
+        default: "xs",
+        enum:["xs","s","m","l","xl"]
+    },
     photo:{
         type: String,
     },

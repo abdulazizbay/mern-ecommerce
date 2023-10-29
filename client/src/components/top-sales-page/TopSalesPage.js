@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import {Button} from "../buttons/Button";
 import {useAuth} from "../../hooks/inUpHook";
 import { useDispatch } from 'react-redux';
-import { setCartQty } from '../../states/state';
+import {setCartQty} from '../../states/state';
 import {CustomToast} from "../custom-toast/CustomToast"
+import { useNavigate } from 'react-router-dom';
 export const TopSalesPage = () => {
     const { request, loading } = useHttp();
     const auth = useAuth();
@@ -15,7 +16,10 @@ export const TopSalesPage = () => {
     const dispatch = useDispatch()
     const gender = useSelector((state) => Object.values(state.gender)[0]);
     const [products, setProducts] = useState([]);
+
     const [productsCart,setProductsCart] = useState([])
+    const navigate = useNavigate();
+    console.log(products)
     const fetchData = async () => {
         try {
             const data = await request("/api/product/client/getallproducts", "POST", { category: gender });
@@ -28,6 +32,7 @@ export const TopSalesPage = () => {
     useEffect(() => {
         fetchData();
     }, [gender]);
+
     const handleAddCart = async (productID) => {
         try {
             const data = await request("/api/cart/addtocart", "POST", [productID], {
@@ -49,6 +54,15 @@ export const TopSalesPage = () => {
             ErrorToast(error.message);
         }
     };
+    const handleDetail = (productId) => {
+        const clickedProduct = products.find(product => product._id === productId);
+
+        if (clickedProduct) {
+            navigate(`/${productId}`);
+        }
+    }
+    console.log(products)
+
     return (
         <StyledTopSalesPage gender={gender}>
             <section className="top-sales-container">
@@ -57,22 +71,24 @@ export const TopSalesPage = () => {
                         <h1>Top Sales</h1>
                     </div>
 
+
                     <div className="products">
                         {products.map((product) => (
                             <div className="product" key={product._id}>
-                                <img src={product.photo} />
+                                <img src={product.photo} onClick={() => handleDetail(product._id)} />
                                 <div className="gray-box">
                                     <p>{product.price}$</p>
                                 </div>
                                 <div
-                                     onClick={event => handleAddCart(product._id)}
-                                     className={`add-cart ${productsCart.includes(product._id) ? 'blue-bg' : ''}`}
+                                    onClick={() => handleAddCart(product._id)}
+                                    className={`add-cart ${productsCart.includes(product._id) ? 'blue-bg' : ''}`}
                                 >
                                     +
                                 </div>
                             </div>
                         ))}
                     </div>
+
                     <div className="bottom-widgets">
                         <div className="catalog-button">
                             <Button bgcolor="#0047FF" fontcolor="#ffff">Open Catalog</Button>
@@ -100,7 +116,7 @@ const StyledTopSalesPage = styled.div`
     height: 100%;
     width: 100%;
     main {
-      padding: 100px 113px 125px 125px;
+      padding: 100px 113px 0 125px;
       .title {
         font-size: 64px;
         font-weight: 500;
