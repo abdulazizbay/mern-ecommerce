@@ -63,8 +63,6 @@ export const DetailProduct = () => {
         }
 
         const nextPaymentDate = new Date(today.getFullYear(), currentMonth, currentDay);
-
-        // Set the locale option to 'ru' for Russian
         const formattedDate = nextPaymentDate.toLocaleString("ru", {
             day: "numeric",
             month: "long",
@@ -75,7 +73,11 @@ export const DetailProduct = () => {
 
     const handleAddCart = async () => {
         try {
-            const data = await request("/api/cart/addtocart", "POST", [productId], {
+            const data = await request("/api/cart/addtocart", "POST", {
+                productId:productId,
+                color:"green",
+                size:"xl",
+            }, {
                 Authorization: `Bearer ${auth.token}`,
             });
 
@@ -88,8 +90,6 @@ export const DetailProduct = () => {
                 ErrorToast("Failed to add product to cart");
             }
         } catch (error) {
-            console.log(22)
-            console.log(error.message)
             ErrorToast(error.message);
 
         }

@@ -47,8 +47,8 @@ export const Bestsellers = ()=>{
                         showIndicators={false}
                         centerMode={true}
                         centerSlidePercentage={94}
-                        interval={8000}
-                        transitionTime={5000}
+                        interval={3000}
+                        transitionTime={3000}
                     >
                         {slideContents.map((slide, index) => (
                             <div key={index} className="slides">

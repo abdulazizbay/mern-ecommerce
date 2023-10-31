@@ -23,6 +23,16 @@ const CartSchema = mongoose.Schema({
             type: Number,
             default:0
           },
+            color:{
+                type: String,
+                enum: ["black", "white","blue","green","red","green","yellow",],
+                default:"black"
+            },
+            size:{
+                type: String,
+                enum: ["xs", "s","m","l","xl"],
+                default:"xs"
+            },
         },
       ],
     });

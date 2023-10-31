@@ -1,62 +1,48 @@
-
-const  jwt =  require('jsonwebtoken')
-const config  = require('config')
 const User = require('../models/User')
 const Cart = require('../models/Cart')
 const Product = require('../models/product')
 
+const od = [{productID:"11212122",color:"black"}]
+
+
 exports.addtocart = async (req, res) => {
     try {
-        const productList = req.body;
-
+        // const productList = req.body;
+        const {productId,color,size} = req.body
         const userId = req.user.userId;
-        console.log(productList)
         console.log(userId)
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ message: 'User not Found' });
         }
-        console.log("000")
         const productObj = {};
         let bill = 0;
-        for (const productId of productList) {
-            console.log("1111")
-            const product = await Product.findById(productId);
-            if (!product) {
-                return res.status(400).json({ message: 'Product not Found' });
-            }
-
-            if (productObj[productId]) {
-                productObj[productId]++;
-            } else {
-                productObj[productId] = 1;
-            }
-            console.log("333")
-            bill += product.price * productObj[productId];
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(400).json({ message: 'Product not Found' });
         }
+
+        if (productObj[productId]) {
+            productObj[productId]++;
+        } else {
+            productObj[productId] = 1;
+        }
+        bill += product.price * productObj[productId];
 
         const cart = await Cart.findOne({ user: userId });
         if (!cart) {
-            console.log(444)
-            const newCart = new Cart({ user: userId, product: productList, bill: bill });
+            const newCart = new Cart({ user: userId, product: productId, bill: bill,color:color,size:size });
             await newCart.save();
-            console.log("ke;do")
             return res.status(200).json({ message: 'success', cart: newCart });
         } else {
-            console.log(555)
-            for (const productId of productList) {
-                const existingProduct = cart.products.find((item) => item.product.equals(productId));
+            const existingProduct = cart.products.find((item) => (item.product.equals(productId) && item.color === color && item.size===size));
                 const product = await Product.findById(productId);
                 if (existingProduct) {
-                    console.log(666)
                     existingProduct.qty += productObj[productId];
                     existingProduct.bill += product.price * productObj[productId];
                 } else {
-                    console.log(777)
-                    cart.products.push({ product: productId, qty: productObj[productId], bill: product.price * productObj[productId] });
+                    cart.products.push({ product: productId, qty: productObj[productId], bill: product.price * productObj[productId], color: color, size:size });
                 }
-            }
-            console.log(888)
             await cart.save();
             return res.status(200).json({ message: 'success', cart: cart });
         }
