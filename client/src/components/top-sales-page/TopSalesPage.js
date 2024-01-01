@@ -3,14 +3,15 @@ import {IoIosArrowBack as LeftArrow, IoIosArrowForward as RightArrow} from "reac
 import { useSelector } from 'react-redux';
 import { useHttp } from "../../hooks/authHook";
 import { useEffect, useState } from "react";
-import {Button} from "../buttons/Button";
+import { CustomButton} from "../buttons/Button";
 import {useAuth} from "../../hooks/inUpHook";
 import { useDispatch } from 'react-redux';
 import {setCartQty} from '../../states/state';
 import {CustomToast} from "../custom-toast/CustomToast"
 import { useNavigate } from 'react-router-dom';
+import {LoadingPage} from "../loading-page/LoadingPage";
 export const TopSalesPage = () => {
-    const { request, loading } = useHttp();
+    const { request, wait } = useHttp();
     const auth = useAuth();
     const {ErrorToast ,LoadingToast,SuccessToast} = CustomToast()
     const dispatch = useDispatch()
@@ -35,10 +36,13 @@ export const TopSalesPage = () => {
 
     const handleAddCart = async (productID) => {
         try {
-            const data = await request("/api/cart/addtocart", "POST", [productID], {
+            const data = await request("/api/cart/addtocart", "POST", {
+                productId:productID,
+                color:"black",
+                size:"xs",
+            }, {
                 Authorization: `Bearer ${auth.token}`,
             });
-
             if (data) {
                 const cartQty = data.cart.products.reduce((total, product) => total + product.qty, 0);
                 dispatch(setCartQty(cartQty));
@@ -73,25 +77,30 @@ export const TopSalesPage = () => {
 
 
                     <div className="products">
-                        {products.map((product) => (
-                            <div className="product" key={product._id}>
-                                <img src={product.photo} onClick={() => handleDetail(product._id)} />
-                                <div className="gray-box">
-                                    <p>{product.price}$</p>
+                        {wait ? (
+                            <LoadingPage />
+                        ) : (
+                            products.map((product) => (
+                                <div className="product" key={product._id}>
+                                    <img src={product.photo} onClick={() => handleDetail(product._id)} />
+                                    <div className="gray-box">
+                                        <p>{product.price}$</p>
+                                    </div>
+                                    <div
+                                        onClick={() => handleAddCart(product._id)}
+                                        className={`add-cart ${productsCart.includes(product._id) ? 'blue-bg' : ''}`}
+                                    >
+                                        +
+                                    </div>
                                 </div>
-                                <div
-                                    onClick={() => handleAddCart(product._id)}
-                                    className={`add-cart ${productsCart.includes(product._id) ? 'blue-bg' : ''}`}
-                                >
-                                    +
-                                </div>
-                            </div>
-                        ))}
+                            )))
+                        }
                     </div>
+
 
                     <div className="bottom-widgets">
                         <div className="catalog-button">
-                            <Button bgcolor="#0047FF" fontcolor="#ffff">Open Catalog</Button>
+                            <CustomButton bgcolor="#759BFC" fontcolor="#ffff">Open Catalog</CustomButton>
                         </div>
                         <div className="arrows">
                             <div className="left-arrow">

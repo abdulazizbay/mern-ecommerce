@@ -6,7 +6,8 @@ import { DetailProduct } from "./components/detail-product/DetailProduct";
 import { Navbar } from "./components/navbar/Navbar";
 import { Footer } from "./components/footer/Footer";
 import { NotFoundPage } from "./components/not-found-page/NotFoundPage";
-
+import {Cart} from "./components/cart/Cart"
+import {ProfilePage} from "./components/profile-page/ProfilePage";
 function App() {
     return (
         <Router>
@@ -17,7 +18,7 @@ function App() {
 
 function MainApp() {
     const location = useLocation();
-    const routesWithoutNavbar = ["/auth/login", "/auth/register", "/404"];
+    const routesWithoutNavbar = ["/auth/login", "/auth/register", "/404","/profile"];
 
     const isNavbarVisible = !routesWithoutNavbar.includes(location.pathname);
 
@@ -29,8 +30,10 @@ function MainApp() {
                 <Route path="/auth/register" element={<Register />} />
                 <Route path="/" element={<Base />} />
                 <Route path="/:productId" element={<DetailProduct />} />
+                <Route path="/cart" element={<Cart/>}/>
                 <Route path="/404" element={<NotFoundPage />} />
                 <Route path="*" element={<Navigate to="/404" />} />
+                <Route path="/profile" element={<ProfilePage/>}/>
             </Routes>
             {isNavbarVisible && <Footer />}
         </>

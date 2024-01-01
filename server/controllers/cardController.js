@@ -2,22 +2,54 @@ const User = require('../models/User')
 const Cart = require('../models/Cart')
 const Product = require('../models/product')
 
-const od = [{productID:"11212122",color:"black"}]
+exports.getCart = async (req, res) => {
+    try {
+        const userId = req.user.userId
+        const user = await User.findById(userId)
+        if (!user) {
+            res.status(404).json({message:"User not found"})
+        }
+        const cart = await Cart.findOne({user:userId}).populate('products')
+        if (!cart) {
+            res.status(500).json({message:"Cart not found"})
+        }
+        const productsInCart = cart.products;
 
+        const combinedData = [];
+
+        for (const cartItem of productsInCart) {
+            const product = await Product.findById(cartItem.product);
+
+            if (product) {
+                const combinedItem = {
+                    cartItem,
+                    product,
+                };
+                combinedData.push(combinedItem);
+            }
+        }
+        res.status(200).send({ message: "Success", cartData: combinedData })
+    }catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
 exports.addtocart = async (req, res) => {
     try {
-        // const productList = req.body;
+        const productList = req.body;
         const {productId,color,size} = req.body
+        console.log(productList)
+        console.log(productId)
         const userId = req.user.userId;
-        console.log(userId)
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ message: 'User not Found' });
         }
         const productObj = {};
         let bill = 0;
+        console.log(productId)
         const product = await Product.findById(productId);
+        console.log(product)
         if (!product) {
             return res.status(400).json({ message: 'Product not Found' });
         }

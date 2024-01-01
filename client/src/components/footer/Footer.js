@@ -4,7 +4,9 @@ import fc from "../../assets/facebook.png"
 import inst from "../../assets/instagram.png"
 import tch from "../../assets/twitch.png"
 import ggl from "../../assets/google.svg"
-
+import visaImg from "../../assets/visapay.png"
+import unionImg from "../../assets/unionpay.png"
+import masterImg from "../../assets/mastercard.png"
 export const Footer = () => {
     const topOptions = ["Box", "Run", "Fitness", "Sales"];
     const bottomOptions = ["T-shirts", "Costumes", "Shoes", "Other"];
@@ -17,18 +19,27 @@ export const Footer = () => {
                         <img src={logoIMG} alt="Logo" />
                     </div>
                     <div className="options">
-                        <div className="top-options">
-                            {topOptions.map((option) => (
-                                <div className="option-group" key={option}>
-                                    <div className="option">{option}</div>
-                                    <div className="sub-options">
-                                        {bottomOptions.map((subOption) => (
-                                            <div className="sub-option" key={subOption}>{subOption}</div>
-                                        ))}
+                        <div className="content">
+                            <div className="top-options">
+                                {topOptions.map((option) => (
+                                    <div className="option-group" key={option}>
+                                        <div className="option">{option}</div>
+                                        <div className="sub-options">
+                                            {bottomOptions.map((subOption) => (
+                                                <div className="sub-option" key={subOption}>{subOption}</div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+                            <div className="payment-options">
+                                <img src={masterImg}/>
+                                <img src={visaImg}/>
+                                <img src={unionImg}/>
+                            </div>
                         </div>
+
+
                         <div className="option-social-media">
                             <div className="bottom-options-group">
                                 <ul>
@@ -79,31 +90,45 @@ const StyledFooter = styled.footer`
         }
         .options {
           padding-left: 170px;
-          .top-options {
+          .content{
             display: flex;
-            gap: 150px;
-
-            .option-group {
+            gap: 70px;
+            .top-options {
               display: flex;
-              flex-direction: column;
-              gap: 10px;
+              gap: 150px;
 
-              .option {
-                font-size: 24px;
-              }
-
-              .sub-options {
+              .option-group {
                 display: flex;
                 flex-direction: column;
-                gap: 5px;
+                gap: 10px;
 
-                .sub-option {
-                  font-size: 18px;
-                  opacity: 0.6;
+                .option {
+                  font-size: 24px;
                 }
+
+                .sub-options {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 5px;
+
+                  .sub-option {
+                    font-size: 18px;
+                    opacity: 0.6;
+                  }
+                }
+              }
+          }
+            .payment-options{
+              display: flex;
+              gap: 10px;
+
+              img{
+                width: 100px;
+                height: 60px;
               }
             }
           }
+
           .option-social-media{
             display: flex;
             flex-direction: row;

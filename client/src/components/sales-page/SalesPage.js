@@ -5,7 +5,7 @@ import menzoomedIMG from "../../assets/zoomedimage.png";
 import womenZoomedIMG from "../../assets/zoomedWomenSales.png";
 import uniSalesIMG from "../../assets/universalSale.png";
 import uniZoomedIMG from "../../assets/uniZoomed.png";
-import { Button } from "../buttons/Button";
+import { CustomButton} from "../buttons/Button";
 import { IoIosArrowBack as LeftArrow, IoIosArrowForward as RightArrow } from "react-icons/io";
 import { useSelector } from "react-redux";
 import {useEffect, useState} from "react";
@@ -52,9 +52,9 @@ export const SalesPage = () => {
                         <div className="zoomed-image">
                             <img src={zoomedImage} alt="Zoomed Image" />
                             <div className="button">
-                                <Button bgcolor="#0047FF" fontcolor="#fff">
+                                <CustomButton bgcolor="#0047FF" fontcolor="#fff">
                                     Open Catalog
-                                </Button>
+                                </CustomButton>
                             </div>
                         </div>
                         <div className="page-changer">

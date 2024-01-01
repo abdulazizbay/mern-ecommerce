@@ -21,7 +21,7 @@ export const useHttp = ()=>{
             setWait(false)
             return parsedResponse
         }catch(e){
-            setWait(false)
+            // setWait(false)
             setError(e.message || "something went wrong fetching")
             throw e
         }

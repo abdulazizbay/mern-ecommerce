@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap');
 @import url('https://blogfonts.com/css/aWQ9MTY0MjM3JnN1Yj0yMzcmYz1tJnR0Zj1NYXp6YXJkSC1CbGFjay5vdGYmbj1tYXp6YXJk/Mazzard.otf');
 @font-face {
@@ -36,7 +37,7 @@ body {
   line-height: 1;
   font-family: "MazzardFont", sans-serif;
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 ol, ul {
@@ -57,3 +58,10 @@ table {
 *{
   box-sizing: border-box;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+

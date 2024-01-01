@@ -3,7 +3,7 @@ import { useHttp } from "../../hooks/authHook";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Rate } from "antd";
-import { Button } from "../buttons/Button";
+import { CustomButton} from "../buttons/Button";
 import { AiOutlineHeart } from "react-icons/ai";
 import {setCartQty} from "../../states/state";
 import {useAuth} from "../../hooks/inUpHook";
@@ -19,6 +19,8 @@ export const DetailProduct = () => {
 
     const sizeOptions = ["xs", "s", "m", "l", "xl"];
     const colorOptions = ["black", "white", "red", "blue"];
+    const [chosenColor,setChosenColor] = useState("black")
+    const [chosenSize,setChosenSize] = useState("xs")
     const [productInfo, setProductInfo] = useState({
         review: 0,
         price: 0,
@@ -75,8 +77,8 @@ export const DetailProduct = () => {
         try {
             const data = await request("/api/cart/addtocart", "POST", {
                 productId:productId,
-                color:"green",
-                size:"xl",
+                color:chosenColor,
+                size:chosenSize,
             }, {
                 Authorization: `Bearer ${auth.token}`,
             });
@@ -95,9 +97,8 @@ export const DetailProduct = () => {
         }
     };
 
-
     return (
-        <StyledDetailProduct>
+        <StyledDetailProduct chosenColor={chosenColor} chosenSize={chosenSize}>
             <Toaster
                 position="bottom-right"
                 reverseOrder={false}
@@ -138,8 +139,11 @@ export const DetailProduct = () => {
                             <h1>Цвета</h1>
                             <div className="color-group">
                                 {colorOptions.map((item, index) => (
-                                    <div className="gray-box" key={index}>
-                                        <div className={item} />
+                                    <div className={`gray-box ${chosenColor === item ? "selected" : ""}`} key={index}>
+                                        <div
+                                            className={item}
+                                            onClick={(e)=>{setChosenColor(item)}}
+                                        />
                                     </div>
                                 ))}
                             </div>
@@ -149,12 +153,19 @@ export const DetailProduct = () => {
                             <h1>Размеры</h1>
                             <div className="size-options">
                                 {sizeOptions.map((size) => (
-                                    <div key={size}>{size}</div>
+                                    <div
+                                        className={`size-box ${chosenSize === size ? "selected" : ""}`}
+                                        key={size}
+                                        onClick={(e)=>{setChosenSize(size)}}
+                                    >
+                                        {size}
+                                    </div>
                                 ))}
                             </div>
                         </div>
                         <div className="cart-wishlist">
-                            <Button
+
+                            <CustomButton
                                 children="Добавить в карзину"
                                 bgcolor="#000000"
                                 fontcolor="#FFFFFF"
@@ -211,6 +222,8 @@ const StyledDetailProduct = styled.div`
         display: flex;
         align-items: flex-end;
         border-radius: 15px;
+        //border: 1px solid #000;
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
         img {
           width: 300px;
           height: 495px;
@@ -257,10 +270,11 @@ const StyledDetailProduct = styled.div`
             width: 54px;
             height: 70px;
             border-radius: 10px;
-          }&:hover{
-             background-color: white;
-              border: 1px solid #000;
-           }
+          }
+        }
+        .selected {
+          background-color: white;
+          border: 1px solid #000;
         }
         .red {
           background-color: #FF0000;
@@ -274,6 +288,7 @@ const StyledDetailProduct = styled.div`
         .white {
           background-color: #fff;
         }
+        
         .line {
           margin-top: 50px;
         }
@@ -296,6 +311,9 @@ const StyledDetailProduct = styled.div`
             align-items: center;
           }
           
+        }
+        .size-box.selected {
+          border: 1.5px solid #000;
         }
       }
       .cart-wishlist {

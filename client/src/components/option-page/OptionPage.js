@@ -20,7 +20,7 @@ export const OptionPage = () => {
     return (
         <StyledOptionPage>
             <section className="option-page-container">
-                <main>
+                <div className="content">
                     <div
                         className={`men-img ${choice === "men" ? "active" : ""}`}
                         onMouseEnter={() => handleOption("men")}
@@ -28,7 +28,6 @@ export const OptionPage = () => {
                         <div className="circle">
                             <img src={menImg} alt="Men" />
                             <span>Men's</span>
-
                         </div>
                     </div>
                     <div
@@ -40,7 +39,7 @@ export const OptionPage = () => {
                             <span>Women's</span>
                         </div>
                     </div>
-                </main>
+                </div>
             </section>
         </StyledOptionPage>
     );
@@ -54,25 +53,23 @@ const StyledOptionPage = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    main {
+    .content {
       display: flex;
       justify-content: space-between;
-      width: 100%;
-      padding: 0 120px;
-
+      gap: 130px;
       .woman-img, .men-img {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 530px;
-        height: 530px;
+        width: min(38.80vw, 530px);
+        height: min(38.80vw, 530px);
         border-radius: 50%;
         background-color: #373A3E80;
         position: relative;
 
         .circle {
-          width: 530px;
-          height: 530px;
+          width: min(38.80vw, 530px);
+          height: min(38.80vw, 530px);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -80,31 +77,41 @@ const StyledOptionPage = styled.div`
           position: relative;
           transition: all 1000ms;
           img {
-            max-width: 377px;
-            max-height: 650px;
+            max-width: min(26vw, 500px);
+            max-height: min(45vw, 650px);
             margin-top: -124px;
           }&:hover{
              cursor: pointer;
            }
-
           span {
             position: absolute;
-            bottom: 270px;
-            font-size: 64px;
+            bottom: 18.7vw;
+            font-size: min(4.4vw,64px);
             color: white;
           }
         }
       }
-
-      .woman-img {
-        margin-left: 130px;
-      }
     }
   }
-
   .active {
     .circle {
       background-color: #C36106;
     }
+  }
+  @media (max-width: 1100px) {
+    section{
+      height: 50vh;
+      .content {
+        gap: 40px;
+        .woman-img, .men-img {
+          width: 103px;
+          height: 180px;
+          .circle {
+            width: 145px;
+            height: 146px
+        }
+      }
+    }
+    
   }
 `;

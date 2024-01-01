@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import "../register/form.css"
 import {useAuth} from "../../hooks/inUpHook"
 import {CustomToast} from "../custom-toast/CustomToast";
-import {redirect} from "react-router-dom";
 import fc from "../../assets/facebook.png"
 import gog from "../../assets/google.svg"
 import inst from "../../assets/instagram.png"
