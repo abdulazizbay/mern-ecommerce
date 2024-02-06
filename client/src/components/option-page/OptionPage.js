@@ -99,19 +99,43 @@ const StyledOptionPage = styled.div`
     }
   }
   @media (max-width: 1100px) {
-    section{
-      height: 50vh;
+    section {
+      height: 70vh;
+
       .content {
         gap: 40px;
+
         .woman-img, .men-img {
-          width: 103px;
-          height: 180px;
           .circle {
-            width: 145px;
-            height: 146px
+            width: 345px;
+            height: 345px;
+            img{
+              width: 345px;
+              height: 425px
+            }
+          }
         }
       }
     }
-    
+  }
+  @media (max-width: 740px) {
+    section {
+      height: 50vh;
+
+      .content {
+        gap: 40px;
+
+        .woman-img, .men-img {
+          .circle {
+            width: 145px;
+            height: 145px;
+            img{
+              width: 145px;
+              height: 180px
+            }
+          }
+        }
+      }
+    }
   }
 `;

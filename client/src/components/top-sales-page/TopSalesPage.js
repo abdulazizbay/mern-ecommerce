@@ -70,12 +70,7 @@ export const TopSalesPage = () => {
     return (
         <StyledTopSalesPage gender={gender}>
             <section className="top-sales-container">
-                <main>
-                    <div className="title">
-                        <h1>Top Sales</h1>
-                    </div>
-
-
+                    <h1>Top Sales</h1>
                     <div className="products">
                         {wait ? (
                             <LoadingPage />
@@ -112,7 +107,6 @@ export const TopSalesPage = () => {
                         </div>
                     </div>
 
-                </main>
             </section>
 
         </StyledTopSalesPage>
@@ -124,9 +118,8 @@ const StyledTopSalesPage = styled.div`
     background-color:  #fff;
     height: 100%;
     width: 100%;
-    main {
-      padding: 100px 113px 0 125px;
-      .title {
+    padding: 100px 113px 0 125px;
+      h1 {
         font-size: 64px;
         font-weight: 500;
       }
@@ -142,11 +135,13 @@ const StyledTopSalesPage = styled.div`
           display: flex;
           justify-content: center;
           img {
+            z-index: 2;
             top: 0;
             position: absolute;
             width: 170px;
             height: 404px;
             transition: top 0.5s ease-out, width 0.5s ease-out, height 0.5s ease-out;
+            
           }
           &:hover {
             img{
@@ -193,6 +188,7 @@ const StyledTopSalesPage = styled.div`
             cursor: pointer;
             opacity: 0; 
             transition: top 0.5s ease-out, opacity 0.5s ease-out;
+            z-index: 3;
         }
           .add-cart.blue-bg {
             background-color: blue; 
@@ -219,7 +215,102 @@ const StyledTopSalesPage = styled.div`
           }
         }
       }
+  
+
   }
+  @media (max-width: 1400px) {
+    section {
+      padding: 26px 9px 0 25px;
+      h1 {
+        font-size: 36px;
+      }
+      .products {
+        padding: 30px 0 60px 0;
+        column-gap: 10px;
+        row-gap: 40px;
+
+        .product{
+          width: 170px;
+          height: 338px;
+          img{
+            width: 125px;
+            height: 300px;
+            top: 30px;
+          }
+          .gray-box {
+            width: 170px;
+            height: 260px;
+            border-radius: 45px;
+            position: relative;
+            overflow: hidden; 
+
+            p {
+              font-size: 24px; 
+              text-align: center;
+              padding-top: 200px; 
+              position: absolute;
+              bottom: 10px; 
+              left: 0;
+              right: 0;
+            }
+          }
+        }
+      }
+      .bottom-widgets {
+        .arrows{
+          gap: 10px;
+          .left-arrow , .right-arrow{
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+
+  }
+
+  @media (max-width: 750px) {
+    section {
+      padding: 37px 5px 0 15px;
+      .products {
+        padding-bottom: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        grid-gap: 30px; 
+
+        .product {
+          width: 170px;
+          height: 338px;
+          img{
+            width: 100px;
+            height: 150px;
+            top: 60px;
+          }
+          .gray-box {
+            width: 100px;
+            height: 153px;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+
+            p {
+              font-size: 13px;
+              text-align: center;
+              padding-top: 200px;
+              position: absolute;
+              bottom: 10px;
+              left: 0;
+              right: 0;
+            }
+          }
+        }
+      }
+      .bottom-widgets {
+        display: none;
+      }
+    }
+  }
+
 `;
 
 

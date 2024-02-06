@@ -25,4 +25,9 @@ const StyledButtons = styled.button`
   font-size: 48px;
   font-weight: 500;
   cursor: pointer;
+  @media (max-width: 1400px) {
+    width: 227px;
+    height: 50px;
+    font-size: 24px;
+  }
 `;

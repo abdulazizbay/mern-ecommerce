@@ -173,4 +173,10 @@ const StyledSalesPage = styled.div`
       
     }
   }
+  @media (max-width: 1400px) {
+    section{
+        display: none;
+    }
+    
+  }
 `

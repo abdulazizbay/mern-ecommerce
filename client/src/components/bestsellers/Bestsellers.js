@@ -116,7 +116,6 @@ const StyledBestsellers = styled.div`
           .description {
             max-width: 360px;
             padding-bottom: 50px;
-            height: 168px;
             p{
               font-size: 24px;
               line-height: 28.37px;
@@ -159,6 +158,115 @@ const StyledBestsellers = styled.div`
           }
         }
       }
+    }
+  }
+  @media (max-width: 1400px) {
+    section{
+      height: 418px;
+      main{
+        padding: 31px 0 0 21px;
+        .slides{
+          width: 710px;
+          height: 418px;
+          max-width: 100%;
+
+          .content{
+            padding: 42px 0 0 41px;
+            h1{
+              font-size: 40px;
+              padding: 12px 0 20px 0;
+            }
+            .description {
+              max-width: 210px;
+              padding-bottom: 0;
+              p{
+                font-size: 15px;
+                line-height: 18px;
+              }
+            }
+            .size-container{
+              padding-top: 10px;
+              .size-group{
+                font-size: 16px;
+                .size-option{
+                  width: 60px;
+                  height: 36px;
+                  border-radius: 3px;
+                }
+                
+              }
+            }
+            
+            
+          }
+          
+        }
+        .image-container{
+          right: 25px !important;
+          img{
+            width: 270px !important;
+            height: 330px !important;
+          }
+        }
+      }
+      
+    }
+  }
+  @media (max-width: 800px) {
+    section{
+      height: 348px;
+      main{
+        padding: 12px 0 0 10px;
+        .slides{
+          width: 348px;
+          height: 205px;
+          border-radius: 15px;
+          .content{
+            padding: 24px 0 0 34px;
+            p{
+              font-size: 8px;
+            }
+            h1{
+              font-size: 20px;
+              padding: 12px 0 15px 0;
+            }
+            .description {
+              max-width: 112px;
+              height: 54px;
+              overflow: hidden;
+              p{
+                font-size: 8px;
+                line-height: 9px;
+              }
+            }
+            .size-container{
+              h2{
+                font-size: 20px;
+              }
+              .size-group{
+                padding-top: 5px;
+                font-size: 8px;
+                gap: 1.5px;
+                .size-option{
+                  width: 23px;
+                  height: 15px;
+                }
+
+              }
+            }
+
+
+          }
+
+        }
+        .image-container{
+          img{
+            width: 127px !important;
+            height: 156px !important;
+          }
+        }
+      }
+
     }
   }
 `;

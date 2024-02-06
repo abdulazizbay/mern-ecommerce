@@ -103,8 +103,7 @@ export const DetailProduct = () => {
                 position="bottom-right"
                 reverseOrder={false}
             />
-            <section>
-                <main>
+                <section>
                     <div className="media-container">
                         {[1, 2, 3, 4].map((index) => (
                             <div className="image-grid" key={index}>
@@ -164,17 +163,18 @@ export const DetailProduct = () => {
                             </div>
                         </div>
                         <div className="cart-wishlist">
-
                             <CustomButton
                                 children="Добавить в карзину"
                                 bgcolor="#000000"
                                 fontcolor="#FFFFFF"
                                 onClick={handleAddCart}
                             />
-                            <AiOutlineHeart size={60} />
+                            <div className="wishlist-img">
+                                <AiOutlineHeart size={60} />
+                            </div>
+
                         </div>
                         <div className="payment-container">
-                            <div className="wrapper">
                                 <div className="title">
                                     <h3>4 платежа по {devidePayment.toFixed(2)}$</h3>
                                     <p >без % и переплат</p>
@@ -191,21 +191,16 @@ export const DetailProduct = () => {
                                     ))}
                                 </div>
                                 <p>Плати частями - по 25% каждые две недели.</p>
-                            </div>
+
                         </div>
                     </div>
-                </main>
-            </section>
+                </section>
         </StyledDetailProduct>
     );
 };
 
 const StyledDetailProduct = styled.div`
   section {
-    width: 100%;
-    height: 100%;
-  }
-  main {
     padding: 150px 107px 100px 100px;
     display: flex;
     flex-direction: row;
@@ -222,7 +217,6 @@ const StyledDetailProduct = styled.div`
         display: flex;
         align-items: flex-end;
         border-radius: 15px;
-        //border: 1px solid #000;
         box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
         img {
           width: 300px;
@@ -333,14 +327,7 @@ const StyledDetailProduct = styled.div`
         height: 220px;
         background-color: #D9D9D9;
         border-radius: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .wrapper {
-          padding: 20px 0 0 25px;
-
+        padding: 20px 0 0 25px;
           h3 {
             font-size: 32px;
           }
@@ -353,7 +340,7 @@ const StyledDetailProduct = styled.div`
           .devide-payment {
             display: flex;
             flex-direction: row;
-            gap: 20px;
+            gap: 10px;
 
             h5 {
               padding: 6px 0 2px 0;
@@ -371,9 +358,185 @@ const StyledDetailProduct = styled.div`
               margin: auto; 
             }
           }
+        
+      }
+
+    }
+  }
+  @media (max-width: 1350px) {
+    section{
+      padding: 117px 21px 40px  18px;
+      gap: 50px;
+      .media-container{
+        height: 400px;
+        gap: 20px;
+        .image-grid{
+          width: 150px;
+          height: 260px;
+          //width: max(20.1vw, 150px);
+          //height: max(34.9vw, 260px);
+          img{
+            width: 150px;
+            height: 247px;
+
+          }
+        }
+      }
+      .content-container{
+        h1{
+          font-size: 32px;
+        }
+        h2{
+          font-size: 24px;
+        }
+        .line{
+          width: 215px;
+          margin-top: 10px;
+        }
+        .color-container{
+          padding: 10px 0 0 0;
+          .color-group{
+            gap: 10px;
+            padding-top: 15px;
+          }
+          .gray-box{
+            width: 30px;
+            height: 40px;
+            border-radius: 5px;
+            div{
+              width: 22.5px;
+              height: 28px;
+            }
+          }
+          .line{
+            margin-top: 15px;
+          }
+        }
+        .size-container{
+          padding: 15px 0 30px 0;
+          .size-options{
+            margin-top: 15px;
+            gap: 10px;
+            div{
+              width: 50px;
+              height: 30px;
+              font-size: 20px;
+            }
+          }
+        }
+        .cart-wishlist{
+          button{
+            font-size: 24px;
+            width: 249px;
+            height: 38px;
+            border-radius: 5px;
+          }
+          .wishlist-img{
+            display: none;
+          }
+        }
+        .payment-container{
+          margin-top: 30px;
+          width: 340px;
+          height: 170px;
+          padding: 15px 0 0 15px;
+          h3{
+            font-size: 24px;
+          }
+          p{
+            font-size: 12px;
+            padding: 5px 0 14px 0;
+          }
+          .devide-payment{
+             h5{
+               padding: 4px 0 2px 0;
+               font-size: 12px;
+             }
+            .gray-line{
+              width: 70px;
+              height: 3px;
+            }
+          }
         }
       }
 
     }
+  }
+  @media (max-width: 740px) {
+    section{
+      padding: 89px 6px 50px  12px;
+      gap: 18px;
+      .media-container{
+        height: 300px;
+        gap: 14px;
+        .image-grid{
+          width: 86px;
+          height: 150px;
+          img{
+            width: 86px;
+            height: 143px;
+
+          }
+        }
+      }
+      .content-container{
+        h1,h2{
+          font-size: 16px;
+        }
+        
+        .line{
+          width: 135px;
+          margin-top: 10px;
+        }
+        .color-container{
+          padding: 10px 0 0 0;
+          .color-group{
+            gap: 5px;
+            padding-top: 15px;
+          }
+          .gray-box{
+            width: 15px;
+            height: 20px;
+            border-radius: 5px;
+            div{
+              width: 11.2px;
+              height: 14px;
+            }
+          }
+          .line{
+            margin-top: 10px;
+          }
+        }
+        .size-container{
+          padding: 10px 0 30px 0;
+          .size-options{
+            margin-top: 15px;
+            gap: 5px;
+            flex-wrap: wrap;
+            div{
+              width: 29px;
+              height: 20px;
+              font-size: 10px;
+            }
+          }
+        }
+        .cart-wishlist{
+          button{
+            font-size: 12px;
+            width: 129px;
+            height: 24px;
+            border-radius: 5px;
+          }
+          .wishlist-img{
+            display: none;
+          }
+        }
+        .payment-container{
+          display: none;
+        }
+      }
+
+    }
+  
   }
 `;

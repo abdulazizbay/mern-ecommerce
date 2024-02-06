@@ -13,64 +13,60 @@ export const Footer = () => {
     const socialMedia = [fc,inst,tch,ggl,]
     return (
         <StyledFooter>
-            <section className="footer-container">
-                <footer>
-                    <div className="logo">
-                        <img src={logoIMG} alt="Logo" />
-                    </div>
-                    <div className="options">
-                        <div className="content">
-                            <div className="top-options">
-                                {topOptions.map((option) => (
-                                    <div className="option-group" key={option}>
-                                        <div className="option">{option}</div>
-                                        <div className="sub-options">
-                                            {bottomOptions.map((subOption) => (
-                                                <div className="sub-option" key={subOption}>{subOption}</div>
-                                            ))}
-                                        </div>
+            <footer>
+                <div className="logo">
+                    <img src={logoIMG} alt="Logo" />
+                </div>
+                <div className="options">
+                    <div className="content">
+                        <div className="top-options">
+                            {topOptions.map((option) => (
+                                <div className="option-group" key={option}>
+                                    <div className="option">{option}</div>
+                                    <div className="sub-options">
+                                        {bottomOptions.map((subOption) => (
+                                            <div className="sub-option" key={subOption}>{subOption}</div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                            <div className="payment-options">
-                                <img src={masterImg}/>
-                                <img src={visaImg}/>
-                                <img src={unionImg}/>
-                            </div>
+                                </div>
+                            ))}
                         </div>
-
-
-                        <div className="option-social-media">
-                            <div className="bottom-options-group">
-                                <ul>
-                                    {topOptions.map((option) => {
-                                        return <li key={option}>{option}</li>
-                                    })}
-                                </ul>
-                            </div>
-
-                            <div className="social-media">
-                                <ul>
-                                    {socialMedia.map((item)=>{
-                                        return <li key={item} ><img src={item}/></li>
-                                    })}
-                                </ul>
-
-                            </div>
+                        <div className="payment-options">
+                            <img src={masterImg}/>
+                            <img src={visaImg}/>
+                            <img src={unionImg}/>
                         </div>
-
                     </div>
 
-                </footer>
-            </section>
+
+                    <div className="option-social-media">
+                        <div className="bottom-options-group">
+                            <ul>
+                                {topOptions.map((option) => {
+                                    return <li key={option}>{option}</li>
+                                })}
+                            </ul>
+                        </div>
+
+                        <div className="social-media">
+                            <ul>
+                                {socialMedia.map((item)=>{
+                                    return <li key={item} ><img src={item}/></li>
+                                })}
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </footer>
         </StyledFooter>
     );
 };
 
 const StyledFooter = styled.footer`
-    section{
       width: 100%;
-      height: 293px;
       background-color: #1B1E23;
 
       footer{
@@ -155,6 +151,70 @@ const StyledFooter = styled.footer`
           }
         }
       }
+  @media (max-width: 1420px) {
+    footer {
+      padding: 50px 0 30px 20px;
+      .options {
+        padding-left: 100px;
+        .content {
+          gap: 30px;
+          .top-options {
+            gap: 93px;
+            .option-group:nth-child(n + 3) {
+              display: none; 
+            }
+          }
+        }
+        .option-social-media{
+          .bottom-options-group{
+            display: none;
+          }
+        }
+      }
     }
+  }
+  @media (max-width: 780px) {
+    footer {
+      padding: 12px 0 10px 12px;
+      .logo{
+        img{
+          width: 48px;
+          height: 28px;
+        }
+      }
+      .options {
+        padding-left: 83px;
+        .content {
+          .top-options {
+            gap: 29px;
+            .option-group{
+              .option{
+                font-size: 14px;
+              }
+              .sub-options{
+                .sub-option{
+                  font-size: 8px;
+                }
+
+                
+              }
+            }
+          }
+          .payment-options{
+            img{
+              width: 35px;
+              height: 20px;
+            }
+          }
+
+        }
+        .option-social-media{
+          display: none;
+        }
+
+      }
+    }
+  }
+  
   
 `;

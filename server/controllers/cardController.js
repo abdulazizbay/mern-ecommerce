@@ -14,7 +14,6 @@ exports.getCart = async (req, res) => {
             res.status(500).json({message:"Cart not found"})
         }
         const productsInCart = cart.products;
-
         const combinedData = [];
 
         for (const cartItem of productsInCart) {

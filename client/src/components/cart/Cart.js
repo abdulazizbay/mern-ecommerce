@@ -41,7 +41,6 @@ export const Cart = () => {
         <StyledCart>
             {wait?<LoadingPage/>:
             <section className="cart-container">
-                <main>
                     <div className="content">
                     <div className="product-info">
                         {cartData.map((item, index) => (
@@ -50,10 +49,25 @@ export const Cart = () => {
                                     <img src={item.product.photo} alt={item.product.name} />
                                 </div>
                                 <div className="attributes-container">
-                                    <div className="name-desc">
+                                    <div className="title-qty">
                                         <h2>{item.product.name}</h2>
-                                        <p>{item.product.description}</p>
+                                        <div className="qty-container">
+                                            <div className="qty-container">
+                                                <p onClick={() => {
+                                                    const updatedCartData = [...cartData];
+                                                    updatedCartData[index].cartItem.qty -= 1;
+                                                    setCartData(updatedCartData);
+                                                }}>-</p>
+                                                <p>{item.cartItem.qty}</p>
+                                                <p onClick={() => {
+                                                    const updatedCartData = [...cartData];
+                                                    updatedCartData[index].cartItem.qty += 1;
+                                                    setCartData(updatedCartData);
+                                                }}>+</p>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <p>{item.product.description}</p>
                                     <div className="color-size">
                                         <div className="color-container">
                                             <h2>Цвет</h2>
@@ -112,7 +126,6 @@ export const Cart = () => {
                             </div>
                         </div>
                     </div>
-                </main>
 
             </section>
             }
@@ -122,16 +135,15 @@ export const Cart = () => {
 
 const StyledCart = styled.div`
   section {
-    width: 100%;
-    background-color: #fff;
+
     h2 {
       font-size: 40px;
     }
     p {
       font-size: 20px;
     }
-    main {
-      padding: 159px 28px 70px 50px;
+     
+      padding: 159px 28px 70px 29px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -144,8 +156,12 @@ const StyledCart = styled.div`
         flex-direction: column;
         gap: 50px;
         .product-item {
+          padding: 20px 10px 20px 25px;
           display: flex;
-          gap: 60px;
+          gap: 25px;
+          border: 1px solid black;
+          border-radius: 20px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
           .photo-container {
             img {
               width: 100px;
@@ -153,10 +169,23 @@ const StyledCart = styled.div`
             }
           }
           .attributes-container {
-            .name-desc {
-              p {
-                padding-top: 15px;
+            .title-qty {
+              display: flex;
+              gap: 50px;
+              .qty-container {
+                width: 86px;
+                height: 36px;
+                border: 1px solid black;
+                border-radius: 100px;
+                display: flex;
+                justify-content: center;
+                font-size: 24px;
+                gap: 20px;
+                align-items: center;
               }
+            }
+            p {
+              padding-top: 15px;
             }
             .color-size{
               padding: 33px 0 0 0;
@@ -243,6 +272,10 @@ const StyledCart = styled.div`
         background-color: black;
       }
       .price-payment {
+        border: 1px solid #000;
+        padding: 24px 69px 54px 44px ;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         .price-group{
           display: flex;
           flex-direction: column;
