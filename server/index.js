@@ -64,10 +64,10 @@ app.use(cors())
 app.use(cookieParser())
 //
 // app.use('/api/auth',require('./routes/userRouter'))
-// app.use('/api/product',require('./routes/productRouter'))
+app.use('/api/product',require('./routes/productRouter'))
 app.use('/api/category',require('./routes/categoryRouter'))
-// app.use('/api/cart',require('./routes/cartRouter'))
-// app.use('/api/search',require('./routes/searchProduct'))
+app.use('/api/cart',require('./routes/cartRouter'))
+app.use('/api/search',require('./routes/searchProduct'))
 // app.use(errorHandler);
 
 app.get("/", (req, res) => {
