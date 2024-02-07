@@ -6,48 +6,48 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 
 
-exports.register = (req, res)=>{
-    try{
-        const {name,email,password} = req.body;
-        const userExist =  User.findOne({email})
-        if(userExist){
-            return res.status(400).send({message:"User already exists"})
-        }
-        // const hashedPassword =  bcrypt.hash(password,12)
-        const user = new User({email:email,name:name,password:"hashedPassword"})
-         user.save()
-        res.status(200).send({message:"User created successfully"})
-    }catch(err){
-        res.status(400).send({message: err})
-        console.log(err, ':error');
-    }
-}
+// exports.register = (req, res)=>{
+//     try{
+//         const {name,email,password} = req.body;
+//         const userExist =  User.findOne({email})
+//         if(userExist){
+//             return res.status(400).send({message:"User already exists"})
+//         }
+//         // const hashedPassword =  bcrypt.hash(password,12)
+//         const user = new User({email:email,name:name,password:"hashedPassword"})
+//          user.save()
+//         res.status(200).send({message:"User created successfully"})
+//     }catch(err){
+//         res.status(400).send({message: err})
+//         console.log(err, ':error');
+//     }
+// }
 
-exports.login =  (req, res) => {
-    try {
-        const { name, email, password } = req.body;
-        const userExist =  User.findOne({ email });
-        if (!userExist) {
-            return res.status(400).json({ message: 'User not found, please create an account first.' });
-        }
-        // const checkedUser =  bcrypt.compare(password, userExist.password);
-        if (!"checkedUser") {
-            return res.status(404).json({ message: 'Password mismatch' });
-        }
-        // const token = jwt.sign(
-        //     { userId: userExist.id },
-        //     config.get('jwtSecret'),
-        //     { expiresIn: '1d' }
-        // );
-        // res.cookie("accessToken", token, {
-        //     httpOnly: true
-        // });
-        res.status(200).json({ token, userID: userExist.id });
-    } catch (err) {
-        console.error(err);
-        res.status(400).json({ message: 'An error occurred during login.' });
-    }
-};
+// exports.login =  (req, res) => {
+//     try {
+//         const { name, email, password } = req.body;
+//         const userExist =  User.findOne({ email });
+//         if (!userExist) {
+//             return res.status(400).json({ message: 'User not found, please create an account first.' });
+//         }
+//         // const checkedUser =  bcrypt.compare(password, userExist.password);
+//         if (!"checkedUser") {
+//             return res.status(404).json({ message: 'Password mismatch' });
+//         }
+//         // const token = jwt.sign(
+//         //     { userId: userExist.id },
+//         //     config.get('jwtSecret'),
+//         //     { expiresIn: '1d' }
+//         // );
+//         // res.cookie("accessToken", token, {
+//         //     httpOnly: true
+//         // });
+//         res.status(200).json({ token, userID: userExist.id });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(400).json({ message: 'An error occurred during login.' });
+//     }
+// };
 
 exports.profileGet =  (req, res) => {
     try {
