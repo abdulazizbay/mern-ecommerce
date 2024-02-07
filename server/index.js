@@ -76,25 +76,31 @@ app.get("/", (req, res) => {
 
 
 
-app.get('api/protected-route', authMiddleware,(req, res) => {
-    res.send('Welcome to the protected route!');
-});
+// app.get('api/protected-route', authMiddleware,(req, res) => {
+//     res.send('Welcome to the protected route!');
+// });
 
-async function start() {
-    try {
-        await mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority", {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+// async function start() {
+//     try {
+//         await mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority", {
+//             useNewUrlParser: true,
+//             useUnifiedTopology: true
+//         })
+//
+//
+//         app.listen(3001, () => {
+//             console.log(`Successfully running`);
+//         });
+//     } catch (e) {
+//         console.error(e);
+//         process.exit(1);
+//     }
+// }
+//
+// start();
+mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority")
 
+app.listen(3001, () => {
+    console.log("Server is Running")
+})
 
-        app.listen(3001, () => {
-            console.log(`Successfully running`);
-        });
-    } catch (e) {
-        console.error(e);
-        process.exit(1);
-    }
-}
-
-start();
