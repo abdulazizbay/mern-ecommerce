@@ -2,9 +2,10 @@
   "name": "amazon-copy",
   "version": "1.0.0",
   "description": "mern stack",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "server": "nodemon app.js",
+    "start": "node index.js",
+    "server": "nodemon index.js",
     "client": "npm run start --prefix ../client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
