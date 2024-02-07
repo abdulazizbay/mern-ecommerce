@@ -9,7 +9,7 @@ const {
 
 
 router.post('/register',register)
-router.get("/getprofile",authMiddleware, profileGet)
-
+// router.get("/getprofile",authMiddleware, profileGet)
+router.get("/getprofile", profileGet)
 router.post('/login',login)
 module.exports = router;
