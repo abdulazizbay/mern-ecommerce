@@ -44,13 +44,13 @@ app.get("/", (req, res) => {
 
 async function start() {
     try {
-        await mongoose.connect(config.get("mongoURI"), {
+        await mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
 
 
-        app.listen(config.get("port"), () => {
+        app.listen(5000, () => {
             console.log(`Successfully running`);
         });
     } catch (e) {
