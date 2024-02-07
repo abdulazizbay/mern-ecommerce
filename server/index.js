@@ -55,9 +55,10 @@ app.use(cors(
     }
 ))
 
-const errorHandler = (err, req, res, next) => {
-    res.status(500).json({ message: 'Internal server error' });
-};
+// const errorHandler = (err, req, res, next) => {
+//     res.status(500).json({ message: 'Internal server error' });
+// };
+// app.use(authMiddleware);
 app.use(express.json({extended: true}));
 app.use(cors())
 app.use(cookieParser())
@@ -67,7 +68,7 @@ app.use('/api/product',require('./routes/productRouter'))
 app.use('/api/category',require('./routes/categoryRouter'))
 app.use('/api/cart',require('./routes/cartRouter'))
 app.use('/api/search',require('./routes/searchProduct'))
-app.use(errorHandler);
+// app.use(errorHandler);
 
 app.get("/", (req, res) => {
     res.json("Hello1");
