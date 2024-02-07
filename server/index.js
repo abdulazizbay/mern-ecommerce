@@ -63,7 +63,7 @@ app.use(express.json({extended: true}));
 app.use(cors())
 app.use(cookieParser())
 //
-// app.use('/api/auth',require('./routes/userRouter'))
+app.use('/api/auth',require('./routes/userRouter'))
 app.use('/api/product',require('./routes/productRouter'))
 app.use('/api/category',require('./routes/categoryRouter'))
 app.use('/api/cart',require('./routes/cartRouter'))
