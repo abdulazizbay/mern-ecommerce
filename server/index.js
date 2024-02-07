@@ -55,10 +55,9 @@ app.use(cors(
     }
 ))
 
-// const errorHandler = (err, req, res, next) => {
-//     res.status(500).json({ message: 'Internal server error' });
-// };
-// app.use(authMiddleware);
+const errorHandler = (err, req, res, next) => {
+    res.status(500).json({ message: 'Internal server error' });
+};
 app.use(express.json({extended: true}));
 app.use(cors())
 app.use(cookieParser())
@@ -68,7 +67,7 @@ app.use('/api/product',require('./routes/productRouter'))
 app.use('/api/category',require('./routes/categoryRouter'))
 app.use('/api/cart',require('./routes/cartRouter'))
 app.use('/api/search',require('./routes/searchProduct'))
-// app.use(errorHandler);
+app.use(errorHandler);
 
 app.get("/", (req, res) => {
     res.json("Hello1");
@@ -76,31 +75,25 @@ app.get("/", (req, res) => {
 
 
 
-// app.get('api/protected-route', authMiddleware,(req, res) => {
-//     res.send('Welcome to the protected route!');
-// });
+app.get('api/protected-route', authMiddleware,(req, res) => {
+    res.send('Welcome to the protected route!');
+});
 
-// async function start() {
-//     try {
-//         await mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority", {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true
-//         })
-//
-//
-//         app.listen(3001, () => {
-//             console.log(`Successfully running`);
-//         });
-//     } catch (e) {
-//         console.error(e);
-//         process.exit(1);
-//     }
-// }
-//
-// start();
-mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority")
+async function start() {
+    try {
+        await mongoose.connect("mongodb+srv://abdulazizxalilov30:mohlaroyim@cluster0.ltxifzp.mongodb.net/?retryWrites=true&w=majority", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
 
-app.listen(3001, () => {
-    console.log("Server is Running")
-})
 
+        app.listen(3001, () => {
+            console.log(`Successfully running`);
+        });
+    } catch (e) {
+        console.error(e);
+        process.exit(1);
+    }
+}
+
+start();
