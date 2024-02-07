@@ -37,6 +37,10 @@ app.use(errorHandler);
 app.get('api/protected-route', authMiddleware,(req, res) => {
     res.send('Welcome to the protected route!');
 });
+app.get("/", (req, res) => {
+    res.json("Hello");
+})
+
 
 async function start() {
     try {
