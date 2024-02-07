@@ -8,13 +8,13 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const authMiddleware = require("./middlewares/authMiddleware")
 
-// app.use(cors(
-//     {
-//         origin: ["https://mern-ecommerce-nu3p.vercel.app"],
-//         method: ["GET", "POST"],
-//         credentials:true
-//     }
-// ))
+app.use(cors(
+    {
+        origin: ["https://deploy-mern-frontend.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+));
 
 const errorHandler = (err, req, res, next) => {
     res.status(500).json({ message: 'Internal server error' });
