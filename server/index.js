@@ -1,59 +1,55 @@
-const express = require('express')
+const express = require('express');
 const app = express();
 const session = require('express-session');
-const config = require('config');
-const mongoose = require('mongoose')
+require('dotenv').config();
+const mongoose = require('mongoose');
 const path = require('path');
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
-const authMiddleware = require("./middlewares/authMiddleware")
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const authMiddleware = require('./middlewares/authMiddleware');
 
-// app.use(cors(
-//     {
-//         origin: ["https://mern-ecommerce-nu3p.vercel.app"],
-//         method: ["GET", "POST"],
-//         credentials:true
-//     }
-// ))
+// Middleware
+app.use(express.json({ extended: true }));
+app.use(cors({
+    origin: ["https://mern-ecommerce-nu3p.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+app.use(cookieParser());
 
-const errorHandler = (err, req, res, next) => {
-    res.status(500).json({ message: 'Internal server error' });
-};
-// app.use(authMiddleware);
-app.use(express.json({extended: true}));
-app.use(cors())
-app.use(cookieParser())
-//
-app.use('/api/auth',require('./routes/userRouter'))
-app.use('/api/product',require('./routes/productRouter'))
-app.use('/api/category',require('./routes/categoryRouter'))
-app.use('/api/cart',require('./routes/cartRouter'))
-app.use('/api/search',require('./routes/searchProduct'))
-app.use(errorHandler);
+// Routes
+app.use('/api/auth', require('./routes/userRouter'));
+app.use('/api/product', require('./routes/productRouter'));
+app.use('/api/category', require('./routes/categoryRouter'));
+app.use('/api/cart', require('./routes/cartRouter'));
+app.use('/api/search', require('./routes/searchProduct'));
 
-
-
-
-app.get('api/protected-route', authMiddleware,(req, res) => {
+// Protected route example
+app.get('/api/protected-route', authMiddleware, (req, res) => {
     res.send('Welcome to the protected route!');
 });
 
+// Error handler
+app.use((err, req, res, next) => {
+    res.status(500).json({ message: 'Internal server error' });
+});
+
+// Start server
 async function start() {
     try {
-        await mongoose.connect(config.get("mongoURI"), {
+        await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        })
+        });
 
-
-        app.listen(config.get("port"), () => {
-            console.log(`Successfully running`);
+        const PORT = process.env.PORT || 5000;
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
         });
     } catch (e) {
-        console.error(e);
+        console.error('MongoDB connection failed:', e);
         process.exit(1);
     }
 }
 
 start();
-
