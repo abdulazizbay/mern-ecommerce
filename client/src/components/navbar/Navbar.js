@@ -9,12 +9,20 @@ import { useSelector } from 'react-redux';
 import { useLocation } from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
+import {useState} from "react";
 
 export const Navbar = ()=>{
     const cartQty = useSelector((state) => Object.values(state.cartQty)[0]);
     const location = useLocation();
     const isHomePage = location.pathname === "/";
     const navigate = useNavigate()
+    const isAuth = JSON.parse(localStorage.getItem("isAuth"))
+    const navOptions = [
+        {label: "BOX", hrefTo:"/"},
+        {label: "RUN", hrefTo:"/"},
+        {label: "FITNESS", hrefTo:"/"},
+        {label: "SALES", hrefTo:"/"},
+    ]
     return(
         <StyledNavbar isHomePage={isHomePage}>
             <header className="header">
@@ -31,10 +39,9 @@ export const Navbar = ()=>{
                 </a>
                 <nav className="header-menu">
                     <ul>
-                        <li>BOX</li>
-                        <li>RUN</li>
-                        <li>FITNESS</li>
-                        <li>SALES</li>
+                        {navOptions.map((item, index)=>(
+                            <li key={index}><a href={item.hrefTo}>{item.label}</a></li>
+                        ))}
                     </ul>
                 </nav>
                 <div className="header-search">
@@ -43,22 +50,25 @@ export const Navbar = ()=>{
                 <div className="header-actions">
                     <span
                         className="user-image"
-                        onClick={()=>{navigate("/profile")}}
+                        onClick={()=>{
+                            isAuth? navigate("/profile") : navigate("/auth/register")
+                        }}
                     >
                         <PiUserCircleBold size={21}/>
                     </span>
                     <span className="wishlist">
                         <AiOutlineHeart size={24}/>
                     </span>
-                    <span
+                    <div
                         className="cart"
                         onClick={()=>{navigate("/cart")}}
                     >
                         <img src={cartIMG}/>
-                    </span>
-                    <span>
+                        <span>
                         {cartQty}
                     </span>
+                    </div>
+
 
                 </div>
                 <div className="burger">
@@ -75,16 +85,17 @@ const StyledNavbar = styled.div`
     .burger{
       display: none;
     }
-    position: fixed;
     z-index: 999;
     display: flex;
     justify-content: space-between;
     color: ${(props) => (props.isHomePage ? "#fff" : "#000")};
+    //1B1E23
+    background-color: ${(props) => (props.isHomePage ? "#1B1E23" : "#FFF")};
     padding-inline: 45px 100px;
     width: 100%;
     a{
       margin-top: 33px;
-      margin-right: 20%;
+      color: ${(props) => (props.isHomePage ? "#fff" : "#000")};
     }
     nav{
       margin-top: 55px;
@@ -97,6 +108,9 @@ const StyledNavbar = styled.div`
           display: flex;
         }
       }
+      a{
+        margin-top: 0;
+      }
     }
     .header-search{
       margin-top: 52px;
@@ -105,6 +119,13 @@ const StyledNavbar = styled.div`
       display: flex;
       gap: 25px;
       margin-top: 54px;
+      div{
+        span{
+          position: absolute;
+          transform: translate(10px,-10px);
+        }
+      }
+      
       .cart{
          border-radius: 30px ;
          height: 24px;

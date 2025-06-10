@@ -97,42 +97,43 @@ export const ProfilePage = ()=>{
     }, [auth.token]);
 
     return(
-        <StyledProfilePage forestImg={forestIMG}>
-            <section className="profile-container">
-                <main>
-                    <div className="cards-container">
-                        <div className="intro-container">
-                            <h1>Cards</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur. Habitant duisviverra volutpat quisque eget.</p>
-                        </div>
-                        <div className="payment-details">
-                            <h2>Payment details</h2>
-                            <div className="payment-group">
-                                {menuProps.map(item => (
-                                    <div className="payment-item" key={item.number}>
-                                        <div className="main-content">
-                                            <img src={item.img} alt="Card" />
-                                            <div className="data">
-                                                <h3>Credit Card</h3>
-                                                <p>{item.number}</p>
-                                            </div>
-                                        </div>
-                                        <div>{item.cvv}</div>
-                                    </div>
-                                ))}
+        !userName && !userEmail?null:
+            <StyledProfilePage forestImg={forestIMG}>
+                <section className="profile-container">
+                    <main>
+                        <div className="cards-container">
+                            <div className="intro-container">
+                                <h1>Cards</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur. Habitant duisviverra volutpat quisque eget.</p>
                             </div>
-                            <div className="new-card">
-                                {!openedMenu?
-                                    <div
-                                        className="gray-box"
-                                        onClick={()=>{setOpenedMenu(true)}}
-                                    >
-                                        +
-                                    </div>
-                                    :
-                                    <div className="opened-group">
-                                        <FormikProvider value={formik}>
-                                            <form onSubmit={formik.handleSubmit}>
+                            <div className="payment-details">
+                                <h2>Payment details</h2>
+                                <div className="payment-group">
+                                    {menuProps.map(item => (
+                                        <div className="payment-item" key={item.number}>
+                                            <div className="main-content">
+                                                <img src={item.img} alt="Card" />
+                                                <div className="data">
+                                                    <h3>Credit Card</h3>
+                                                    <p>{item.number}</p>
+                                                </div>
+                                            </div>
+                                            <div>{item.cvv}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="new-card">
+                                    {!openedMenu?
+                                        <div
+                                            className="gray-box"
+                                            onClick={()=>{setOpenedMenu(true)}}
+                                        >
+                                            +
+                                        </div>
+                                        :
+                                        <div className="opened-group">
+                                            <FormikProvider value={formik}>
+                                                <form onSubmit={formik.handleSubmit}>
                                                     <label htmlFor="cardNum" ><p>Номер карты</p></label>
                                                     <Field
                                                         type="string"
@@ -156,52 +157,54 @@ export const ProfilePage = ()=>{
                                                         <CustomButton fontcolor="#23272F" children="Submit" bgcolor="#D9D9D9" />
                                                     </div>
 
-                                            </form>
-                                        </FormikProvider>
+                                                </form>
+                                            </FormikProvider>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="info-container">
+                            <div className="main-content">
+                                <div className="image-cont">
+                                    <img src={profPic1}/>
+                                </div>
+                                <div className="info-group">
+                                    <h3>{userName}</h3>
+                                    <p>{userEmail}</p>
+                                    <CustomButton bgcolor="#2B63FF" fontcolor="#fff" children="Premium"/>
+                                </div>
+                            </div>
+                            <div className="budget">
+                                <div className="buttons">
+                                    <div className="new-container">
+                                        <h2>New</h2>
                                     </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div className="info-container">
-                        <div className="main-content">
-                            <div className="image-cont">
-                                <img src={profPic1}/>
-                            </div>
-                            <div className="info-group">
-                                <h3>{userName}</h3>
-                                <p>{userEmail}</p>
-                                <CustomButton bgcolor="#2B63FF" fontcolor="#fff" children="Premium"/>
-                            </div>
-                        </div>
-                        <div className="budget">
-                            <div className="buttons">
-                                <div className="new-container">
-                                    <h2>New</h2>
+                                    <div className="plan-container">
+                                        <h2>Installment Plan</h2>
+                                    </div>
                                 </div>
-                                <div className="plan-container">
-                                    <h2>Installment Plan</h2>
+                                <div className="budget-amount">
+                                    <h2>{"100$-1000$"}</h2>
+                                    <input
+                                        type="range"
+                                        id="points"
+                                        name="points"
+                                        min="0"
+                                        max="1000"
+                                        step="10"
+                                        value={budgetAmount}
+                                        onChange={event =>setButdgetAmount(event.target.value)}
+                                    />
+                                    <h2>{budgetAmount}$</h2>
                                 </div>
                             </div>
-                            <div className="budget-amount">
-                                <h2>{"100$-1000$"}</h2>
-                                <input
-                                    type="range"
-                                    id="points"
-                                    name="points"
-                                    min="0"
-                                    max="1000"
-                                    step="10"
-                                    value={budgetAmount}
-                                    onChange={event =>setButdgetAmount(event.target.value)}
-                                />
-                                <h2>{budgetAmount}$</h2>
-                            </div>
                         </div>
-                    </div>
-                </main>
-            </section>
-        </StyledProfilePage>
+                    </main>
+                </section>
+            </StyledProfilePage>
+
+
     )
 }
 

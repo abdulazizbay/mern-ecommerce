@@ -82,19 +82,7 @@ export const Cart = () => {
                                                 ))}
                                             </div>
                                         </div>
-                                        <div className="size-container">
-                                            <h2>Размеры</h2>
-                                            <div className="size-options">
-                                                {sizeOptions.map((size) => (
-                                                    <div
-                                                        className={`size-box ${item.cartItem.size === size ? 'selected' : ''}`}
-                                                        key={size}
-                                                    >
-                                                        <p>{size}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +131,7 @@ const StyledCart = styled.div`
       font-size: 20px;
     }
      
-      padding: 159px 28px 70px 29px;
+      padding: 50px 28px 70px 29px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;

@@ -8,7 +8,6 @@ import {Toaster} from "react-hot-toast";
 export const Base = () =>{
     return (
         <>
-            <Navbar/>
             <OptionPage/>
             <TopSalesPage/>
             <Bestsellers/>

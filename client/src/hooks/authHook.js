@@ -18,10 +18,10 @@ export const useHttp = ()=>{
             if(!response.ok){
                 throw new Error(parsedResponse.message || "something went wrong fetching")
             }
+            localStorage.setItem("isAuth","true")
             setWait(false)
             return parsedResponse
         }catch(e){
-            // setWait(false)
             setError(e.message || "something went wrong fetching")
             throw e
         }

@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import "./form.css"
 import {useAuth} from "../../hooks/inUpHook";
 import {CustomToast} from "../custom-toast/CustomToast";
+import { useNavigate } from 'react-router-dom';
 export const Register = () => {
     const auth = useAuth()
     const {ErrorToast,LoadingToast,SuccessToast} = CustomToast()
@@ -21,6 +22,7 @@ export const Register = () => {
     });
     const socialMediaImages = [fc, gog, inst, twch];
     const { request, wait, error } = useHttp();
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -34,9 +36,9 @@ export const Register = () => {
                 const data = await request('/api/auth/register', 'POST', { ...values },{
                     Authorization: `Bearer ${auth.token}`
                 });
-                console.log(data);
                 setSubmitting(false);
                 SuccessToast("User created successfully")
+                navigate("/auth/login")
             } catch (e) {
                 ErrorToast(e.message)
                 throw e.message;
@@ -95,7 +97,6 @@ export const Register = () => {
                                         {formik.touched.name && formik.errors.name}
                                     </div>
 
-                                    {/*<label htmlFor="password" className="floating-label">Password</label>*/}
                                     <Field
                                         type="password"
                                         id="password"
