@@ -10,9 +10,9 @@ const authMiddleware = require('./middlewares/authMiddleware');
 app.use(express.json({ extended: true }));
 app.use(cors({
     origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
+
 
 app.use(cookieParser());
 
