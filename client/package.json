@@ -42,7 +42,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://mern-ecommerce-97kr.onrender.com",
   "browserslist": {
     "production": [
       ">0.2%",
