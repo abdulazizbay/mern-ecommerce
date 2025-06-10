@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express();
-const session = require('express-session');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authMiddleware = require('./middlewares/authMiddleware');
