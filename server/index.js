@@ -9,7 +9,7 @@ const authMiddleware = require('./middlewares/authMiddleware');
 // Middleware
 app.use(express.json({ extended: true }));
 app.use(cors({
-    origin: ["https://mern-ecommerce-nu3p.vercel.app"],
+    origin: ["https://mern-ecommerce-phi-orpin.vercel.app"],
     methods: ["GET", "POST"],
     credentials: true
 }));
